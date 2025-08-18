@@ -7,10 +7,10 @@ import (
 )
 
 type Trip struct {
-	ID       primitive.ObjectID
-	UserId   string
-	Status   string
-	RideFare *RideFare
+	ID       primitive.ObjectID `json:"id"`
+	UserId   string             `json:"user_id"`
+	Status   string             `json:"status"`
+	RideFare *RideFare          `json:"ride_fare"`
 }
 
 type TripRepository interface {

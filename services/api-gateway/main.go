@@ -13,10 +13,16 @@ var (
 func main() {
 	slog.Info("Starting API Gateway")
 
-	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Hello from API Gateway!"))
-	})
+	mux := http.NewServeMux()
 
-	http.ListenAndServe(httpAddr, nil)
+	mux.HandleFunc("POST /trip/preview", handleTripPreview)
+
+	srv := &http.Server{
+		Addr:    httpAddr,
+		Handler: mux,
+	}
+
+	if err := srv.ListenAndServe(); err != nil {
+		slog.Error("Failed to start API Gateway", "error", err)
+	}
 }
