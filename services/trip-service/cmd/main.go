@@ -3,7 +3,7 @@ package main
 import (
 	"log/slog"
 	"net/http"
-	"ride-sharing/services/trip-service/internal/infrastructure/handlers"
+	handlers "ride-sharing/services/trip-service/internal/infrastructure/http"
 	"ride-sharing/services/trip-service/internal/infrastructure/repository"
 	"ride-sharing/services/trip-service/internal/service"
 	"ride-sharing/shared/env"
@@ -20,7 +20,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("POST /preview", h.CreateTrip)
+	mux.HandleFunc("POST /preview", h.TripPreview)
 
 	srv := &http.Server{
 		Addr:    httpAddr,
